@@ -4,7 +4,7 @@
 
 ### 1. Introducción al Flujo de Trabajo Básico
 
-Terraform se basa en un ciclo de vida simple, predecible y seguro. Casi todo lo que haga con Terraform girará en torno a cuatro comandos fundamentales. Comprender este flujo de trabajo es la clave para dominar la herramienta.
+Terraform se basa en un ciclo de vida simple, predecible y seguro. Casi todo lo que hagas con Terraform girará en torno a cuatro comandos fundamentales. Comprender este flujo de trabajo es la clave para dominar la herramienta.
 
 El flujo de trabajo es: **Escribir -> init -> plan -> apply**.
 
@@ -29,15 +29,15 @@ El flujo de trabajo es: **Escribir -> init -> plan -> apply**.
 ### terraform plan (Planificar)
 
 * **¿Qué hace?** Este es el comando más importante para la seguridad y la previsibilidad. **No realiza ningún cambio.**
-* **Propósito:** Compara su código (el _estado deseado_) con el archivo de estado (el _estado conocido_) y con la infraestructura real (el _estado real_), y le muestra exactamente lo que Terraform _hará_ si ejecuta apply.
-* **Interpretación del Resultado:** El plan le mostrará un resumen con tres símbolos:
+* **Propósito:** Compara el código (el _estado deseado_) con el archivo de estado (el _estado conocido_) y con la infraestructura real (el _estado real_), y muestra exactamente lo que Terraform _hará_ si ejecutamos apply.
+* **Interpretación del Resultado:** El plan mostrará un resumen con tres símbolos:
   *
     * (verde): **Crear (Create).** El recurso existe en el código pero no en el estado. Se creará.
   *
     * (rojo): **Destruir (Destroy).** El recurso existe en el estado pero no en el código. Se destruirá.
   * \~ (amarillo): **Modificar (Update in-place).** El recurso existe en ambos, pero un argumento (ej. una etiqueta) ha cambiado. Se actualizará.
 * **Analogía:** Es el arquitecto jefe revisando los planos (su código) contra el edificio existente (estado real) y entregándole un informe detallado: "Vamos a construir un nuevo baño (crear), demoler la pared del garaje (destruir) y repintar la puerta de entrada (modificar)".
-* **Buena Práctica:** **Siempre** ejecute terraform plan antes de apply. Revise su salida cuidadosamente. Es su red de seguridad contra cambios accidentales o destructivos.
+* **Buena Práctica:** **Siempre** ejecute terraform plan antes de apply. Hay que revisar su salida cuidadosamente. Es la  barrera de seguridad contra cambios accidentales o destructivos.
 {% endstep %}
 
 {% step %}
@@ -46,8 +46,8 @@ El flujo de trabajo es: **Escribir -> init -> plan -> apply**.
 * **¿Qué hace?** Ejecuta el plan y realiza los cambios en el mundo real.
 * **Propósito:** Conciliar el estado real de la infraestructura con el estado deseado en su código.
 * **El Proceso:**
-  1. Por defecto, terraform apply primero le mostrará el _mismo plan_ que terraform plan.
-  2. Luego, le pedirá una **aprobación manual**. Deberá escribir yes para continuar. (Esto es una última red de seguridad).
+  1. Por defecto, terraform apply primero mostrará el _mismo plan_ que terraform plan.
+  2. Luego, nos pedirá una **aprobación manual**. Deberemos escribir yes para continuar. (Esto es una última red de seguridad).
   3. Terraform ejecutará las llamadas API (usando los providers) para crear, modificar o destruir los recursos, respetando el orden de las dependencias.
   4. Una vez completado con éxito, **actualizará el archivo terraform.tfstate** con los nuevos atributos.
 * **Analogía:** Es dar la orden al equipo de construcción: "Procedan. Ejecuten el plan que revisamos".
@@ -59,8 +59,8 @@ El flujo de trabajo es: **Escribir -> init -> plan -> apply**.
 * **¿Qué hace?** Es lo contrario de apply. Lee su estado y destruye _toda_ la infraestructura gestionada por ese proyecto.
 * **Propósito:** Limpiar los recursos de forma segura.
 * **El Proceso:**
-  1. Le mostrará un plan (todo en rojo, con el símbolo -) de lo que va a destruir.
-  2. Le pedirá que escriba yes para confirmar.
+  1. Mostrará un plan (todo en rojo, con el símbolo -) de lo que va a destruir.
+  2. Pedirá que escriba yes para confirmar.
 * **Analogía:** Es la orden de demolición de todo el edificio. Es una acción muy destructiva, pero increíblemente útil en entornos de desarrollo y pruebas para limpiar y evitar costes.
 {% endstep %}
 {% endstepper %}
@@ -72,13 +72,13 @@ El flujo de trabajo es: **Escribir -> init -> plan -> apply**.
 Terraform utiliza un lenguaje de configuración propio llamado **HCL (HashiCorp Configuration Language)**. Está diseñado para ser legible por humanos y compatible con máquinas.
 
 * **Características:**
-  * **Declarativo:** Usted define el "qué", no el "cómo".
+  * **Declarativo:** Definimos el "qué", no el "cómo".
   * **Legible:** Utiliza bloques y argumentos clave = valor, que se ven limpios y son fáciles de entender.
   * **Compatible con JSON:** Terraform también puede leer archivos JSON, pero HCL es el formato preferido.
 
 ### 2. Estructura de un Archivo .tf
 
-Todo su código HCL se escribe en archivos con la extensión .tf. Cuando ejecuta terraform plan, Terraform lee _todos_ los archivos .tf del directorio actual y los trata como si fueran un solo documento.
+Todo el código HCL se escribe en archivos con la extensión .tf. Cuando ejecutamos terraform plan, Terraform lee _todos_ los archivos .tf del directorio actual y los trata como si fueran un solo documento.
 
 Para mantener el orden, la **buena práctica** es dividir el código en archivos lógicos:
 
@@ -131,7 +131,7 @@ Este bloque especial configura el propio Terraform.
 
 terraform {
 
-## Requiere que se use la versión 1.9.0 o superior
+#### Requiere que se use la versión 1.9.0 o superior
 
 required\_version = ">= 1.9.0"
 
@@ -144,11 +144,11 @@ Este bloque configura un provider específico (definido en el bloque terraform).
 * **Propósito:** Configurar los detalles de autenticación o región para ese provider.
 * **Ejemplo (providers.tf):**
 
-## Configura el provider "aws" que descargamos
+#### Configura el provider "aws" que descargamos
 
 provider "aws" { region = "us-east-1"
 
-## Nota: La autenticación (claves) se toma automáticamente del AWS CLI (aws configure)
+#### Nota: La autenticación (claves) se toma automáticamente del AWS CLI (aws configure)
 
 }
 
@@ -160,17 +160,17 @@ Este es el bloque principal. Describe un componente de infraestructura.
 * **Sintaxis:** resource "\<TIPO\_DE\_RECURSO>" "\<NOMBRE\_LOCAL>" { ... }
 * **Ejemplo (main.tf):**
 
-## TIPO = "aws\_s3\_bucket"
+#### TIPO = "aws\_s3\_bucket"
 
-## NOMBRE LOCAL = "mi\_bucket\_de\_ejemplo"
+#### NOMBRE LOCAL = "mi\_bucket\_de\_ejemplo"
 
 resource "aws\_s3\_bucket" "mi\_bucket\_de\_ejemplo" {
 
-## Argumento
+#### Argumento
 
 bucket = "mi-bucket-unico-123456789"
 
-## Argumento de tipo Mapa
+#### Argumento de tipo Mapa
 
 tags = { Name = "MiBucket" Entorno = "dev" } }
 
@@ -183,7 +183,7 @@ tags = { Name = "MiBucket" Entorno = "dev" } }
 
 En nuestro primer ejemplo, podríamos "hardcodear" (escribir directamente) el nombre del bucket S3 en el archivo main.tf:
 
-## main.tf (MAL EJEMPLO - Hardcodeado)
+#### main.tf (MAL EJEMPLO - Hardcodeado)
 
 resource "aws\_s3\_bucket" "example" { bucket = "mi-bucket-unico-12345" }
 

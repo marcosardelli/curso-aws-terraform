@@ -1,5 +1,6 @@
 # Table of contents
-* [Módulo 1 - Introducción a AWS y Terraform](modulo-1-introduccion-a-aws-y-terraform.md)
+
+* [Módulo 1 - Introducción a AWS y Terraform](README.md)
 * [Módulo 2 - Fundamentos de AWS](modulo-2-fundamentos-de-aws.md)
 * [Módulo 3 - Introducción a Terraform](modulo-3-introduccion-a-terraform.md)
 * [Módulo 4 - Gestión de identidad y seguridad](modulo-4-gestion-de-identidad-y-seguridad.md)

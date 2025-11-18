@@ -323,7 +323,7 @@ Beneficios:
 * Autocompletado y validación.
 * Referencias dinámicas a otros recursos de Terraform.
 
-## Módulo 4.4: Lab Fundamental - Roles de IAM para EC2
+## Módulo 4.4: Lab - Roles de IAM para EC2
 
 ### 1. Objetivo del Laboratorio
 
@@ -334,7 +334,7 @@ Para crear un Rol, debemos definir **DOS** políticas:
 1. **Política de Confianza (Trust Policy):** ¿**QUIÉN** puede asumir este rol? (Responde: "El servicio EC2").
 2. **Política de Identidad (Identity Policy):** ¿**QUÉ** puede hacer este rol una vez asumido? (Responde: "Leer de S3").
 
-### 2. Analogía: El Portero y la Lista VIP
+### 2. Analogía típica: El Portero y la Lista VIP
 
 * **Política de Confianza:** Es el **portero** de una discoteca. Su _único_ trabajo es comprobar la lista de invitados y decidir si ec2.amazonaws.com tiene permiso para "entrar" (asumir el rol).
 * **Política de Identidad:** Es la **pulsera VIP** que recibe una vez dentro. Esta pulsera es la que le da los permisos (ej. "acceso a la zona VIP", "bebidas gratis"), que serían nuestros permisos s3:GetObject.
@@ -532,7 +532,7 @@ Dado que el estado puede contener secretos en texto plano, protegerlo es su máx
 
 ### 4. Buena Práctica 3: Forzar la Autenticación Multifactor (MFA)
 
-No podemos _configurar_ un dispositivo MFA virtual para un usuario con Terraform (es un proceso interactivo), pero podemos (y debemos) **forzar su uso** mediante políticas.
+No podemos _configurar_ un dispositivo MFA virtual para un usuario con Terraform (es un proceso interactivo), pero podemos (y deberíamos) **forzar su uso** mediante políticas.
 
 Objetivo: Crear una política que Deniegue (Deny) _todas_ las acciones si el usuario no se ha autenticado con MFA.
 
@@ -798,13 +798,6 @@ resource "aws_cloudtrail" "mi_rastro" {
 {% endstep %}
 {% endstepper %}
 
-### 4. Material de Apoyo
+### 4. Material
 
-#### 🎥 Videos Recomendados
-
-* [**¿Qué es AWS CloudTrail? (Video Oficial)**](https://www.google.com/search?q=https://www.youtube.com/watch?v%3Dk-N43mp-q-Q)
-
-#### 📖 Documentos Clave
-
-* [**Documentación de aws\_cloudtrail**](https://www.google.com/search?q=%5Bhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail%5D\(https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudtrail\))
-* [**Documentación de aws\_s3\_bucket\_policy**](https://www.google.com/search?q=%5Bhttps://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy%5D\(https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy\))
+* [**Video: aws cloudtrail**](https://youtu.be/mXQSnbc9jMs)

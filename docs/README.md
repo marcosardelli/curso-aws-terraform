@@ -4,7 +4,7 @@
 
 ### Introducción
 
-Bienvenido al inicio de su viaje en la nube. En este primer módulo, estableceremos las bases de todo lo que vendrá. Antes de poder _automatizar_ la infraestructura, debemos entender qué es esta infraestructura, por qué es tan fundamental en la tecnología moderna y qué problemas vino a resolver.
+Bienvenido al inicio de tu viaje en la nube. En este primer módulo, estableceremos las bases de todo lo que vendrá. Antes de poder _automatizar_ la infraestructura, debemos entender qué es esta infraestructura, por qué es tan fundamental en la tecnología moderna y qué problemas vino a resolver.
 
 Este documento cubre el concepto más básico pero más importante: **¿Qué es Amazon Web Services (AWS)?**
 
@@ -20,7 +20,7 @@ En lugar de comprar, poseer y mantener sus propios servidores físicos y centros
 
 Todos los servicios en la nube se dividen en tres categorías principales. Comprender esto es crucial para saber qué herramientas usar.
 
-**Analogía: El Restaurante de Pizza**
+**Analogía típica: El Restaurante de Pizza**
 
 * **On-Premise (Tradicional):** Haces todo tú mismo. Cultivas los tomates, haces la masa, construyes el horno, cocinas la pizza y sirves. (Máximo control, máxima responsabilidad).
 * **IaaS:** El proveedor te da la cocina (horno, gas, agua). Tú traes los ingredientes (masa, queso, salsa) y cocinas la pizza.
@@ -257,7 +257,7 @@ AWS ofrece diferentes tipos de almacenamiento para diferentes necesidades. Usar 
 
 ### 1. El Problema: "ClickOps" y la Deriva de Configuración
 
-Antes de IaC, la forma de crear un servidor en la nube era a través de la consola web mediante clics. Este método, conocido despectivamente como **"ClickOps"**, funciona para un solo servidor, pero falla estrepitosamente a escala.
+Antes de IaC, la forma de crear un servidor en la nube era a través de la consola web mediante clics. Este método, conocido despectivamente como **"ClickOps"**, funciona para infraestructuras con relativamente pocos recursos (vpc, subnets, servidores, databases), pero falla estrepitosamente a escala.
 
 Problemas principales del enfoque manual:
 
@@ -271,27 +271,27 @@ Para ilustrar el flujo manual típico, usamos un stepper que refleja el proceso 
 
 {% stepper %}
 {% step %}
-### Iniciar en la consola
+#### Iniciar en la consola
 
 1. Entrar a la consola de AWS.
 2. Hacer clic en "Launch Instance".
 {% endstep %}
 
 {% step %}
-### Seleccionar configuración básica
+#### Seleccionar configuración básica
 
 3. Seleccionar una AMI del menú desplegable.
 4. Seleccionar un tipo de instancia (haciendo clic).
 {% endstep %}
 
 {% step %}
-### Configurar red y seguridad
+#### Configurar red y seguridad
 
 5. Configurar el Security Group (haciendo clic).
 {% endstep %}
 
 {% step %}
-### Lanzar
+#### Lanzar
 
 6. Hacer clic en "Launch".
 {% endstep %}
@@ -321,7 +321,7 @@ Beneficios clave:
 #### Declarativo (El "Qué")
 
 * Usted declara el estado final deseado; la herramienta decide cómo alcanzarlo.
-* Ejemplos: Terraform, CloudFormation, Pulumi.
+* Ejemplos: **Terraform**, CloudFormation, Pulumi.
 * Ventaja: las herramientas declarativas comparan el estado deseado con el estado real y realizan las acciones mínimas necesarias para reconciliar.
 
 Terraform es una herramienta declarativa, por eso la potencia del curso se basa en ella.
@@ -338,7 +338,7 @@ Terraform es una herramienta declarativa, por eso la potencia del curso se basa 
 
 ### 1. ¿Qué es Terraform?
 
-Terraform es una herramienta de Infraestructura como Código (IaC) de código abierto creada por HashiCorp. Usa HCL (HashiCorp Configuration Language) y sigue un flujo: Write → Plan → Apply.
+Terraform es una herramienta de Infraestructura como Código (IaC) de código abierto creada por HashiCorp. Usa HCL (HashiCorp Configuration Language) y sigue un flujo: Init → Plan → Apply ... ->Destroy.
 
 Características principales:
 
@@ -369,13 +369,9 @@ Veredicto estratégico:
 * Terraform (HCL): DSL, enfocado a Ops.
 * Pulumi/CDK: lenguajes de propósito general (TypeScript, Python, etc.), más orientado a Devs con mayor poder de abstracción.
 
-### 3. Material de Apoyo y Siguientes Pasos
-
-#### Documentos&#x20;
+### 3. Documentación oficial
 
 * [**Introducción a Terraform (Página oficial de HashiCorp)**](https://www.terraform.io/intro)
-
-
 
 ***
 
@@ -408,13 +404,7 @@ Características de TFC:
 
 Resumen rápido:
 
-| Característica      |            Terraform OSS / OpenTofu | Terraform Cloud (TFC)                    |
-| ------------------- | ----------------------------------: | ---------------------------------------- |
-| Coste               |                            Gratuito | Freemium / Pago para funciones avanzadas |
-| Gestión de Estado   | Manual (S3 + DynamoDB, por ejemplo) | Automática y segura                      |
-| Ejecución           |                Local o CI/CD propio | Remota y gobernada                       |
-| Policy as Code      |              No (requiere terceros) | Sí                                       |
-| Registro de Módulos |                       No (usar Git) | Sí (privado)                             |
+<table><thead><tr><th>Característica</th><th width="240" align="right">Terraform OSS / OpenTofu</th><th>Terraform Cloud (TFC)</th></tr></thead><tbody><tr><td>Coste</td><td align="right">Gratuito</td><td>Freemium / Pago para funciones avanzadas</td></tr><tr><td>Gestión de Estado</td><td align="right">Manual (S3 + DynamoDB, por ejemplo)</td><td>Automática y segura</td></tr><tr><td>Ejecución</td><td align="right">Local o CI/CD propio</td><td>Remota y gobernada</td></tr><tr><td>Policy as Code</td><td align="right">No (requiere terceros)</td><td>Sí</td></tr><tr><td>Registro de Módulos</td><td align="right">No (usar Git)</td><td>Sí (privado)</td></tr></tbody></table>
 
 ### 3. Material de Apoyo
 
@@ -431,7 +421,7 @@ Resumen rápido:
 ### 1. El Vínculo: El Provider de AWS
 
 * Un Provider es un plugin que Terraform usa para gestionar recursos específicos (por ejemplo, hashicorp/aws).
-* Declaración típica:
+* Ejemplo de declaración:
 
 ```hcl
 terraform {
@@ -454,7 +444,7 @@ Terraform init descarga el provider y permite al código HCL traducirse a llamad
 
 Flujo estándar empresarial (resumen):
 
-* PR: desarrollador cambia HCL en una rama y abre un Pull Request.
+* PR: desarrollador cambia HCL en una rama y abre un **Pull Request**.
 * CI/CD: ejecuta terraform init/validate/plan y publica el plan en el PR.
 * Revisión humana: arquitecto revisa el plan (no solo el código).
 * Merge: al fusionar, un pipeline seguro ejecuta terraform apply con los permisos necesarios aplicando el plan aprobado.
@@ -467,7 +457,7 @@ Este flujo evita ejecutar apply desde un portátil y crea trazabilidad auditada.
 * Migraciones masivas a AWS usando Terraform (ej. reducción del tiempo de configuración).
 * Gestión a escala (ej. Mercado Libre con miles de instancias y despliegues diarios).
 
-### 4. Material de Apoyo
+### 4. Documentación relacionada
 
 * [**Documentación del Provider de AWS de Terraform**](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
 * [**Tutorial de GitHub Actions para Terraform**](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions)
@@ -515,7 +505,7 @@ resource "aws_instance" "web" {
 
 Best practice: usar un Backend Remoto seguro (S3 + DynamoDB o Terraform Cloud).
 
-### 5. Material de Apoyo
+### 5. Documentación relacionada
 
 * [**Propósito del Estado de Terraform (Documentación Oficial)**](https://developer.hashicorp.com/terraform/language/state)
 
@@ -535,35 +525,35 @@ Siga estos pasos como un stepper:
 
 {% stepper %}
 {% step %}
-### Acceder a IAM
+#### Acceder a IAM
 
 1. Inicie sesión en la Consola de AWS con un usuario Root o con privilegios de administrador.
 2. Vaya a IAM (busque "IAM").
 {% endstep %}
 
 {% step %}
-### Crear usuario
+#### Crear usuario
 
 3. En el panel izquierdo haga clic en "Users".
 4. Haga clic en "Create user".
 {% endstep %}
 
 {% step %}
-### Detalles del usuario
+#### Detalles del usuario
 
 5. User name: p. ej. terraform-student.\
    IMPORTANT: NO marque "Provide user access to the AWS Management Console" (usuario programático).
 {% endstep %}
 
 {% step %}
-### Permisos
+#### Permisos
 
 6. Seleccione "Attach policies directly".\
    Busque y marque **AdministratorAccess**. (Para el lab).
 {% endstep %}
 
 {% step %}
-### Revisar y crear
+#### Revisar y crear
 
 7. Revise y haga clic en "Create user".
 {% endstep %}
@@ -580,7 +570,7 @@ Siga estos pasos como un stepper:
 * IAM Identity Center (SSO) para humanos.
 * Roles OIDC (CI/CD) para máquinas, evitando claves estáticas.
 
-### 5. Material de Apoyo
+### 5. Documentación relacionada
 
 * [**Creación de un Usuario IAM (Documentación de AWS)**](https://docs.aws.amazon.com/es_es/IAM/latest/UserGuide/id_users_create.html)
 * [**Gestión de Claves de Acceso (Documentación de AWS)**](https://docs.aws.amazon.com/es_es/IAM/latest/UserGuide/id_credentials_access-keys.html)
@@ -680,9 +670,8 @@ Outputs: mi\_id\_de\_cuenta = "123456789012"
 
 Si ve esto, su entorno está configurado y listo.
 
-### 5. Material de Apoyo
+### 5. Documentación relacionada
 
 * [**Instalar el AWS CLI (Guía Oficial)**](https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-install.html)
 * [**Instalar Terraform (Guía Oficial)**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * [**Configuración del AWS CLI (Guía Oficial)**](https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-quickstart.html)
-
